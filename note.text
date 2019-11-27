@@ -1,0 +1,63 @@
+File Steps:
+____________
+
+1. Spring boot starter Parent.
+2. Spring Boot Starter Web.
+3. Java Version 9
+4. Spring Boot plugin
+5. Create Spring Boot Application Launcher.
+
+
+
+TODO:
+
+Mongo DB:
+
+Install (Mac OS): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+$ brew tap mongodb/brew
+
+$ brew install mongodb-community@4.2
+In addition to the binaries, the install creates:
+
+the configuration file (/usr/local/etc/mongod.conf)
+the log directory path (/usr/local/var/log/mongodb)
+the data directory path (/usr/local/var/mongodb)
+
+Run MongoDB:
+
+Foreground process:
+
+$ mongod --config /usr/local/etc/mongod.conf 
+
+Run in background:
+$ mongod --config /usr/local/etc/mongod.conf --fork
+
+run MongoDB as a macOS service,
+
+$ brew services start mongodb-community@4.2
+
+To verify that MongoDB is running, open another terminal window and issue the following:
+
+
+$ ps -ef | grep mongod
+
+Connect and Use MongoDB
+
+To begin using MongoDB, connect a mongo shell to the running instance. From a new terminal, issue the following:
+
+$ mong
+
+Working with the mongo Shell
+:To display the database you are using, type db:
+
+Db
+
+To switch database  issue use <db> command 
+Use test
+
+
+
+
+
+
+
