@@ -1,0 +1,211 @@
+
+
+File Steps:
+____________
+
+1. Spring boot starter Parent.
+2. Spring Boot Starter Web.
+3. Java Version 9
+4. Spring Boot plugin
+5. Create Spring Boot Application Launcher.
+
+
+
+TODO:
+
+Mongo DB:
+
+Install (Mac OS): https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+$ brew tap mongodb/brew
+
+$ brew install mongodb-community@4.2
+In addition to the binaries, the install creates:
+
+the configuration file (/usr/local/etc/mongod.conf)
+the log directory path (/usr/local/var/log/mongodb)
+the data directory path (/usr/local/var/mongodb)
+
+Run MongoDB:
+
+Foreground process:
+
+$ mongod --config /usr/local/etc/mongod.conf 
+$mongod # it is enough 
+
+Run in background:
+$ mongod --config /usr/local/etc/mongod.conf --fork
+
+run MongoDB as a macOS service,
+
+$ brew services start mongodb-community@4.2
+
+To verify that MongoDB is running, open another terminal window and issue the following:
+
+
+$ ps -ef | grep mongod
+
+Connect and Use MongoDB
+
+To begin using MongoDB, connect a mongo shell to the running instance. From a new terminal, issue the following:
+
+$ mongo
+
+Working with the mongo Shell
+:To display the database you are using, type db:
+
+Db
+
+To switch database  issue use <db> command 
+Use test
+
+
+MongoDB Tutorial:
+
+Chapter 1:
+Quizzes : Ungraded
+Labs/Homework: 50%
+Final Test: 50%
+Chapter 1 - Week1
+Chapter 2 - Week2
+Chapter 3 - Week 3
+Final Exam: Week 3
+
+Passing Score : 65%
+
+Connect to Atlas Cluster from mongo Shell:
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/test?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username m001-student --password m001-mongodb-basics
+
+Note: it will connect to test database if you want to change the db name then specify
+ Db name after ? In above connection string.
+
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/video?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username m001-student --password m001-mongodb-basics
+
+# Show all collections:
+MongoDB Enterprise Cluster0-shard-0:PRIMARY> show collections
+movies
+
+Mongoldb cluster creation detail:
+https://cloud.mongodb.com/links/registerForAtlas
+
+User:viveksharma.svim@gmail.com/Vivek@123
+Cluster Name :Vivek-cluster
+Db user/password:vivek/Vivek@123
+
+Connect to mongoldb cloud personal cluster :
+mongo "mongodb+srv://vivek-cluster-fci1z.mongodb.net/test"  --username vivek
+
+Or use  database which has preloaded with sample data:
+mongo "mongodb+srv://vivek-cluster-fci1z.mongodb.net/sample_airbnb"  --username vivek
+
+
+
+MongDB user guide :(documentation)
+
+https://docs.mongodb.com/manual/
+
+
+
+Course M121:
+
+
+To connect to M121 course Atlas Cluster, using the mongo shell, you will need to use the following connection command:
+
+
+mongo "mongodb://cluster0-shard-00-00-jxeqq.mongodb.net:27017,cluster0-shard-00-01-jxeqq.mongodb.net:27017,cluster0-shard-00-02-jxeqq.mongodb.net:27017/aggregations?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl -u m121 -p aggregations --norc
+
+
+db.scores.insertMany([{ "_id" : 143, "subject" : "History", "score" : 88 },
+{ "_id" : 2343, "subject" : "History", "score" : 92 },
+{ "_id" : 3434, "subject" : "History", "score" : 97 },
+{ "_id" : 434, "subject" : "History", "score" : 71 },
+{ "_id" : 534, "subject" : "History", "score" : 79 }, 
+{ "_id" : 634, "subject" : "History", "score" : 83 }]);
+
+db.employees.insertMany(
+[ { "_id" : 1, "name" : "Dev" },
+{ "_id" : 2, "name" : "Eliot", "reportsTo" : "Dev" },
+{ "_id" : 3, "name" : "Ron", "reportsTo" : "Eliot" },
+{ "_id" : 4, "name" : "Andrew", "reportsTo" : "Eliot" },
+{ "_id" : 5, "name" : "Asya", "reportsTo" : "Ron" },
+{ "_id" : 6, "name" : "Dan", "reportsTo" : "Andrew" }
+]
+);
+
+db.employees.aggregate( [
+   {
+      $graphLookup: {
+         from: "employees",
+         startWith: ["Ron"],
+         connectFromField: "name",
+         connectToField: "reportsTo",
+         as: "reportingHierarchy"
+      }
+   }
+] ).pretty();
+
+
+MongoDB backup:
+
+mongoexport --host="slc17qpo.us.oracle.com" --port=27017 --collection=users --db=scoutDB --out=/Users/viveksharma/Documents/oracle/scout/mongodbbackup/users.json
+mongoimport --host="slc10vcr.us.oracle.com" --port=27017 --collection=users --db=scoutDB --file=/Users/viveksharma/Documents/oracle/scout/mongodbbackup/users.json
+
+mongoimport --host="slc17qpo.us.oracle.com" --port=27017 --collection=subcomponents --db=scoutDB --fieldFile==/Users/viveksharma/Documents/oracle/bugdb/products_subcomponents.csv
+
+
+Take full db backup:
+
+
+
+MongoDB enable Authentication Control:
+
+https://docs.mongodb.com/manual/tutorial/enable-authentication/
+mongod --port 27017 --dbpath /usr/local/var/mongodb
+mongo --port 27017
+use admin
+db.createUser(
+  {
+    user: "master",
+    pwd: passwordPrompt(), // or cleartext password Scout@123
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+db.adminCommand( { shutdown: 1 } )
+
+Start the mongod with access control enabled.
+
+mongod --auth --port 27017 --dbpath /var/lib/mongodb
+
+If you start the mongod using a configuration file, add the security.authorization configuration file setting:
+
+security:
+    authorization: enabled
+    
+
+start mongo shell with authentication mode:
+mongo --port 27017  --authenticationDatabase "admin" -u "master" -p
+
+use scout_db
+db.createUser({ user: "scout",pwd:  passwordPrompt(),roles: [ { role: "readWrite", db: "scout_db" } ] });
+
+mongo --port 27017 -u "scout" --authenticationDatabase "BetterBugz" -p
+
+
+
+Oracle Database:
+installation guide:  https://medium.com/@mfofana/how-to-install-oracle-database-on-mac-os-sierra-10-12-or-above-c0b350fd2f2c
+ec3f3a0acd0d284da06b34a9e50944c8ac70f6bd1217a26ffca9d161bd78f84f
+Viveks-MacBook-Pro:absctl viveksharma$ docker ps
+CONTAINER ID        IMAGE                 COMMAND             CREATED             STATUS              PORTS                                            NAMES
+ec3f3a0acd0d        truevoly/oracle-12c   "/entrypoint.sh "   11 seconds ago      Up 9 seconds        0.0.0.0:1521->1521/tcp, 0.0.0.0:8080->8080/tcp   wizardly_wescoff
+
+
+mvn install:install-file -Dfile=/Users/viveksharma/Documents/vivek/jars/ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
+mvn clean package && mvn spring-boot:run
+https://github.com/springframeworkguru/spring-boot-oracle-example
+
+JPA documentation:
+https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods
+https://attacomsian.com/blog/spring-data-jpa-many-to-many-mapping
+https://www.baeldung.com/jpa-join-types
+

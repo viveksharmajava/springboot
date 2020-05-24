@@ -1,11 +1,23 @@
 package com.howtodoinjava.rest.model;
 
-public class Employee {
+public class Employee
+//implements Cloneable
+{
+	
 
     public Employee() {
 
     }
 
+//   
+//    @Override
+//    public Object clone() throws CloneNotSupportedException{
+//    	Employee e=  new Employee();
+//    	e.setId(this.id);
+//    	//return this;
+//    	return e;
+//    
+//    }
     public Employee(Integer id, String firstName, String lastName, String email) {
         super();
         this.id = id;

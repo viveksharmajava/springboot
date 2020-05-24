@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.3.RELEASE</version>
+		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -28,7 +28,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.0.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -40,6 +39,30 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+		<!-- jpa dependencies-->
+	
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+          <!--Oracle database driver -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.2</version>
+           <!--  <scope>system</scope>
+            <systemPath>/Users/viveksharma/Documents/vivek/jars/ojdbc7.jar</systemPath> -->
+        </dependency>
+        
+        
 		<!--  Add mongodb dependency -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -50,11 +73,11 @@
 			<artifactId>spring-boot-starter-data-rest</artifactId>
 		</dependency>
 		<!-- Add gson library to convert java objects to corresponding to json -->
-		<dependency>
+		<!-- <dependency>
 		 <groupId>com.google.code.gson</groupId>
 		     <artifactId>gson</artifactId> 
 		     <version>2.3.1</version>
-		 </dependency>
+		 </dependency> -->
 	</dependencies>
 
 	<build>

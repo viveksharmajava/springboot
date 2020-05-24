@@ -52,6 +52,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/skyscreamer/jsonassert/1.3.0/jsonassert-1.3.0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/json/json/20140107/json-20140107.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/4.3.5.RELEASE/spring-test-4.3.5.RELEASE.jar"/>
+	<classpathentry kind="var" path="/Users/viveksharma/.m2/repository/javax/javaee-web-api/6.0/javaee-web-api-6.0.jar"></classpathentry>
 	<classpathentry kind="src" output="target/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>

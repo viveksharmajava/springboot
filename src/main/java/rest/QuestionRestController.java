@@ -21,10 +21,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import question.Question;
-
 @RestController
 public class QuestionRestController {
 //   @Autowired
@@ -33,10 +32,10 @@ public class QuestionRestController {
    private Question question;
    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
    private  HashMap<String,Question> hm = new HashMap<String,Question>();
-  // @RequestMapping("/addQuestion") 
+   @RequestMapping("/addQuestion") 
    @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
-   @PostMapping("/addQuestion")
-   public ResponseEntity<Object> addQuestion(@RequestBody Question questionInbound) {
+   @PostMapping
+   public Question addQuestion(@RequestBody Question questionInbound) {
  	 System.out.println("Add question service called questionInbound"+questionInbound);
  	//Create resource location
      URI location = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -44,9 +43,10 @@ public class QuestionRestController {
                                  .build()
                                  .toUri();
      
+     questionInbound.setQuestionId("4000");
      //Send location in response
-     return ResponseEntity.created(location).build();
-	 // return questionInbound;
+    // return ResponseEntity.created(location).build();
+	  return questionInbound;
    }
   // @RequestMapping("/deleteQuestion/{questionId}") 
    @DeleteMapping("/deleteQuestion/{questionId}")
@@ -67,7 +67,7 @@ public class QuestionRestController {
 	 LOGGER.warn("This is a warn message");
 	 LOGGER.error("This is an error message");
 	
-	 
+	 //mvn install:install-file -Dfile={/Users/viveksharma/Documents/vivek/jars/ojdbc7.jar} -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
 	
 	  List <String> option = new LinkedList<String>();
 	  option.add("Functional Issue");
@@ -79,11 +79,11 @@ public class QuestionRestController {
 	  
 	 // Question q = new Question();
 	  question.setqText("Issue Type");
-	  question.setQuestionType("radio");
+	  question.setQuestion_type("radio");
 	  question.setQuestionId("1001");
 	  List<String> childQuestions = new LinkedList<String>();
 	  childQuestions.add("1001_0");
-	  question.setChildQuestions(childQuestions);
+	  question.setChild_questions(childQuestions);
 	
 	  question.setOptions(option);
 	  hm.put("1001",question);
@@ -107,12 +107,12 @@ public class QuestionRestController {
 		    <version>2.3.1</version>
 		 </dependency>
 	    */
-	    Gson gson = new Gson();    
+	   // Gson gson = new Gson();    
 	    List <Question> array = new ArrayList<Question>();
 	    array.add(question);
 	    question=  new Question();
 	    question.setqText("Child of Functional Issue");
-	    question.setQuestionType("radio");
+	    question.setQuestion_type("radio");
 	    question.setQuestionId("1001_0");
 	    childQuestions = new LinkedList<String>();
 		//childQuestions.add("1002_0");
@@ -123,7 +123,7 @@ public class QuestionRestController {
 		question.setOptions(option);
 		 hm.put("1001_0",question); 
 	    array.add(question);
-	    String json = gson.toJson(array);
+	  //  String json = gson.toJson(array);
 	   // System.out.println("gson json="+json);   
 	  //Ends here
 	   //MongoDB stuff begin here
@@ -144,7 +144,7 @@ public class QuestionRestController {
   @GetMapping
   @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
   public List<Question> getQuestions() {
-	  
+	  System.out.println("\n\n################### \n get Questions API Called !!!\n ###############\n\n\n");
 	  List <String> option = new LinkedList<String>();
 	  option.add("Functional Issue");
 	  option.add("Performance Issue");
@@ -153,11 +153,11 @@ public class QuestionRestController {
 	  
 	 // Question q = new Question();
 	  question.setqText("Issue Type");
-	  question.setQuestionType("radio");
+	  question.setQuestion_type("radio");
 	  question.setQuestionId("1001");
 	  List<String> childQuestions = new LinkedList<String>();
 	  childQuestions.add("1001_0");
-	  question.setChildQuestions(childQuestions);
+	  question.setChild_questions(childQuestions);
 	  
 	  question.setOptions(option);
 	  //Below code show how to convert java objects to corresponding json value 
@@ -180,12 +180,12 @@ public class QuestionRestController {
 		    <version>2.3.1</version>
 		 </dependency>
 	    */
-	    Gson gson = new Gson();    
+	   // Gson gson = new Gson();    
 	    List <Question> array = new ArrayList<Question>();
 	    array.add(question);
 	    question=  new Question();
 	    question.setqText("Child of Functional Issue");
-	    question.setQuestionType("radio");
+	    question.setQuestion_type("radio");
 	    question.setQuestionId("1001_0");
 	    childQuestions = new LinkedList<String>();
 		childQuestions.add("1002_0");
@@ -193,11 +193,11 @@ public class QuestionRestController {
 		 option = new LinkedList<String>();
 		 option.add("Option 1");
 		 option.add("Option 2");
-	   question.setOptions(option);
+	     question.setOptions(option);
 		  
 	    array.add(question);
-	    String json = gson.toJson(array);
-	    System.out.println("gson json="+json);   
+	   // String json = gson.toJson(array);
+	   // System.out.println("gson json="+json);   
 	  //Ends here
 	   //MongoDB stuff begin here
 //	    repository.save(question);

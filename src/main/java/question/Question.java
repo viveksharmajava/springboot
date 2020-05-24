@@ -11,33 +11,29 @@ public class Question {
   
 	
 	private String qText;
-	private String questionType;
+	private String question_type;
 	@Id 
 	private String questionId;
-	private String parentQuestId;
+	private String parent_question;
+	private String option_index;
 	private List<String> options= new LinkedList<String>();
-	private List<String> childs;
+	private List<String> child_questions;
 	public Question(String questionId, String qText, String parentQuestId, List<String> childQuestions) {
 		super();
 		this.questionId = questionId;
 		this.qText = qText;
-		this.parentQuestId = parentQuestId;
-		this.childs = childQuestions;
+		this.parent_question = parentQuestId;
+		//this.option_index = option_index;
+		this.child_questions = childQuestions;
 	}
 	public Question() {
 		
 	}
-	public String getQuestionType() {
-		return questionType;
+	public String getQuestion_type() {
+		return question_type;
 	}
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-	public List<String> getChilds() {
-		return childs;
-	}
-	public void setChilds(List<String> childs) {
-		this.childs = childs;
+	public void setQuestion_type(String question_type) {
+		this.question_type = question_type;
 	}
 	public String getQuestionId() {
 		return questionId;
@@ -45,27 +41,32 @@ public class Question {
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
+	public String getParent_question() {
+		return parent_question;
+	}
+	public void setParent_question(String parent_question) {
+		this.parent_question = parent_question;
+	}
+	public List<String> getChild_questions() {
+		return child_questions;
+	}
+	public void setChild_questions(List<String> child_questions) {
+		this.child_questions = child_questions;
+	}
+	public String getOption_index() {
+		return option_index;
+	}
+	public void setOption_index(String option_index) {
+		this.option_index = option_index;
+	}
+	
 	public String getqText() {
 		return qText;
 	}
 	public void setqText(String qText) {
 		this.qText = qText;
 	}
-	public String getParentQuestId() {
-		return parentQuestId;
-	}
-	public void setParentQuestId(String parentQuestId) {
-		this.parentQuestId = parentQuestId;
-	}
-	public List<String> getChildQuestions() {
-		return childs;
-	}
-	public void setChildQuestions(List<String> childQuestions) {
-		this.childs = childQuestions;
-	}
-	public void addChildQuestion(String child) {
-		this.childs.add(child);
-	}
+	
 	public List<String> getOptions() {
 		return options;
 	}
@@ -76,7 +77,7 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question [questionId=" + questionId + ", qText=" + qText + ", options=" + options + ", parentQuestId="
-				+ parentQuestId + ", childQuestions=" + childs + "]";
+				+ parent_question + ", childQuestions=" + child_questions + "]";
 	}
 	@Override
 	public Object clone() {
